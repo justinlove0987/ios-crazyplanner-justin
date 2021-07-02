@@ -37,11 +37,6 @@ class HomeViewController: UIViewController, TargetSetterViewControllerDelegate, 
         tableView.dataSource = self
         tableView.delegate = self
         tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
-        
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress))
-        tableView.addGestureRecognizer(gesture)
         
         loadTargets()
         loadDailyTargets()
@@ -71,15 +66,6 @@ class HomeViewController: UIViewController, TargetSetterViewControllerDelegate, 
         
         // Activate (Applying)
         NSLayoutConstraint.activate(constraints)
-    }
-    
-    @objc func handleLongPress(_ gestureRecognizer: UILongPressGestureRecognizer){
-        if gestureRecognizer.state == .began {
-            let touchPoint = gestureRecognizer.location(in: tableView)
-            if let indexPath = tableView.indexPathForRow(at: touchPoint) {
-                print(indexPath)
-            }
-        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -254,67 +240,14 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - table view delegate methods
 
-extension HomeViewController: UITableViewDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
+extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "goToEditTarget", sender: indexPath)
         
     }
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        let row = calculateRowIndexInTableView(indexPath: indexPath)
-        dragItem.localObject = dailyTargets[row].name
-        return [ dragItem ]
-        
-    }
-    
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let sourceRow = calculateRowIndexInTableView(indexPath: sourceIndexPath)
-        var destinationRow = calculateRowIndexInTableView(indexPath: destinationIndexPath)
-        
-        
-        if destinationIndexPath.section > sourceIndexPath.section { // 
-            destinationRow -= 1
-        }
-        
-        let dateString = Array(dailyTargetNameDictionary.keys.sorted(by: <))[destinationIndexPath.section]
-        
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy/MM/dd"
-        if let date = dateFormatter.date(from: dateString) {
-            dailyTargets[sourceRow].date = date
-        }
-        
-        // 此處需要先更動資料庫才行
-        let mover = dailyTargets.remove(at: sourceRow)
-        dailyTargets.insert(mover, at: destinationRow)
-        
-        
-        getTableViewCellInfo()
-        
-        let sourceRows = tableView.numberOfRows(inSection: sourceIndexPath.section)
 
-        if sourceRows == 1 {
-            
-            tableView.deleteSections([sourceIndexPath.section], with: .automatic)
-            
-        }
-        
-        saveTargets()
-        
-    }
     
 }
 
