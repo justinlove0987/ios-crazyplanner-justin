@@ -10,7 +10,23 @@ import Foundation
 
 struct DailyTargetOrderedByDate {
     
-    var date: String?
-    var name: [String]?
+    var sectionTitles = [String]()
+    var numberOfRowsInSection = [Int]()
+    
+    mutating func dealwithDate(date: String) {
+        
+        if sectionTitles.contains(date) {
+            if let index = sectionTitles.firstIndex(of: date) {
+                numberOfRowsInSection[index] += 1
+            }
+            
+        } else {
+            sectionTitles.append(date)
+            numberOfRowsInSection.append(1)
+        }
+        
+        
+        
+    }
     
 }

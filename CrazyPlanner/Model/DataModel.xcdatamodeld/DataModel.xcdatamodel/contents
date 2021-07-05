@@ -5,6 +5,8 @@
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="progress" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="row" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
+        <attribute name="section" optional="YES" attributeType="Integer 64" usesScalarValueType="YES"/>
         <attribute name="total" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
     </entity>
     <entity name="Target" representedClassName=".Target" syncable="YES" codeGenerationType="class">
@@ -18,7 +20,7 @@
         <attribute name="weekly" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="DailyTarget" positionX="-63" positionY="45" width="128" height="104"/>
+        <element name="DailyTarget" positionX="-63" positionY="45" width="128" height="134"/>
         <element name="Target" positionX="-63" positionY="-18" width="128" height="149"/>
     </elements>
 </model>

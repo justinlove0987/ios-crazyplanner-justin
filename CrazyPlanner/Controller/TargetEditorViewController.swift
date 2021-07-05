@@ -15,6 +15,10 @@ protocol TargetEditorViewControllerDelegate: AnyObject {
 class TargetEditorViewController: UIViewController {
     
     @IBOutlet weak var progressBar: ProgressBar!
+    @IBOutlet weak var reviseDateTextField: UITextField!
+
+    let datePicker = UIDatePicker()
+    let formatter = DateFormatter()
     
     var delegate: TargetEditorViewControllerDelegate?
     var selectedDailyTarget: DailyTarget?
@@ -23,6 +27,19 @@ class TargetEditorViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "yyyy/MM/dd"
+        
+        
+        if let dailyTarget = selectedDailyTarget {
+            reviseDateTextField.text = formatter.string(from: dailyTarget.date ?? Date())
+        }
+        
+        datePicker.minimumDate = Date()
+        let datePickerCreator = DatePickerCreator(view: view, textField: reviseDateTextField, datePicker: datePicker)
+        datePickerCreator.createDatePicker()
         
     }
     
@@ -38,37 +55,44 @@ class TargetEditorViewController: UIViewController {
             }
         }
         
+
+        
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
-        
-        addAndSubtractHelper(number: +1)
-        
+        addOrSubtractProgress(number: +1)
     }
     
     @IBAction func subtractButtonPressed(_ sender: UIButton) {
-        
-        addAndSubtractHelper(number: -1)
-        
+        addOrSubtractProgress(number: -1)
     }
     
     @IBAction func completeButtonPressed(_ sender: UIButton) {
-        
-        addAndSubtractHelper(number: 0)
-        
+        addOrSubtractProgress(number: 0)
     }
+    
+    
+    
     
     @IBAction func done(_ sender: UIButton) {
         
-        if let  selectedDailyTarget = selectedDailyTarget {
-            delegate?.didFinishEditingTarget(dailyTarget: selectedDailyTarget)
+        let selectedDailyTargetDate = formatter.string(from: selectedDailyTarget?.date ?? Date())
+        let datePickerDate = formatter.string(from: datePicker.date)
+        
+        if selectedDailyTargetDate != datePickerDate {
+            selectedDailyTarget?.date = datePicker.date
+            selectedDailyTarget?.section = -1
+            selectedDailyTarget?.row = -1
         }
         
-        dismiss(animated: true, completion: nil)
         
+        if let  dailyTarget = selectedDailyTarget {
+            delegate?.didFinishEditingTarget(dailyTarget: dailyTarget)
+        }
+        dismiss(animated: true, completion: nil)
     }
     
-    func addAndSubtractHelper(number: Int32) {
+    func addOrSubtractProgress(number: Int32) {
         
         if let selectedDailyTarget = selectedDailyTarget {
             
@@ -89,7 +113,17 @@ class TargetEditorViewController: UIViewController {
             
         }
         
-        
+    }
+    
+    @objc func donePressed() {
+        //fomatter
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .none
+        formatter.dateFormat = "yyyy/MM/dd"
+
+        reviseDateTextField.text = formatter.string(from: datePicker.date)
+        view.endEditing(true)
     }
     
 }

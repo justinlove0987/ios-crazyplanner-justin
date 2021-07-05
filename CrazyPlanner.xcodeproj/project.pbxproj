@@ -11,6 +11,7 @@
 		D05D863226817BE1002428ED /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05D863026817BE1002428ED /* DataModel.xcdatamodeld */; };
 		D0AB5FA426803A94007B761F /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB5FA326803A94007B761F /* ProgressBar.swift */; };
 		D0AB5FAB26806F2F007B761F /* TargetSetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB5FAA26806F2F007B761F /* TargetSetterViewController.swift */; };
+		D0B2ADEB268F9C570034C324 /* DatePickerCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B2ADEA268F9C560034C324 /* DatePickerCreator.swift */; };
 		D0C47741267C91BF002742FB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C47740267C91BF002742FB /* AppDelegate.swift */; };
 		D0C47743267C91BF002742FB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C47742267C91BF002742FB /* SceneDelegate.swift */; };
 		D0C47745267C91BF002742FB /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0C47744267C91BF002742FB /* HomeViewController.swift */; };
@@ -29,6 +30,7 @@
 		D05D863126817BE1002428ED /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		D0AB5FA326803A94007B761F /* ProgressBar.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D0AB5FAA26806F2F007B761F /* TargetSetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetSetterViewController.swift; sourceTree = "<group>"; };
+		D0B2ADEA268F9C560034C324 /* DatePickerCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerCreator.swift; sourceTree = "<group>"; };
 		D0C4773D267C91BF002742FB /* CrazyPlanner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CrazyPlanner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D0C47740267C91BF002742FB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D0C47742267C91BF002742FB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				D0C47757267C9536002742FB /* StatisticsViewController.swift */,
 				D0AB5FA326803A94007B761F /* ProgressBar.swift */,
 				D0C4775B267C9555002742FB /* SettingViewController.swift */,
+				D0B2ADEA268F9C560034C324 /* DatePickerCreator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,6 +191,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B2ADEB268F9C570034C324 /* DatePickerCreator.swift in Sources */,
 				D0521C5826830E4C005998C9 /* TargetEditorViewController.swift in Sources */,
 				D0D784DD268F194200868714 /* DailyTargetOrderedByDate.swift in Sources */,
 				D0C47758267C9536002742FB /* StatisticsViewController.swift in Sources */,

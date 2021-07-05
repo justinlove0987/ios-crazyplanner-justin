@@ -178,6 +178,14 @@
                                     <segue destination="eHe-e3-iG5" kind="show" identifier="goToAddTarget" id="l1L-4U-7Bj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1sA-WA-Ewk">
+                                <rect key="frame" x="276" y="53" width="55" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Nothing"/>
+                                <connections>
+                                    <action selector="Nothing:" destination="WzB-7Q-Orj" eventType="touchUpInside" id="e2j-Ng-ikl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Twv-zY-znu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -344,20 +352,11 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yvV-Ql-GN1">
-                                <rect key="frame" x="139" y="423" width="97" height="34"/>
+                                <rect key="frame" x="139" y="358" width="97" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkc-xr-muU">
-                                <rect key="frame" x="53" y="414" width="30" height="52"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
-                                <state key="normal" title="-"/>
-                                <connections>
-                                    <action selector="subtractButtonPressed:" destination="Z2h-sF-HwZ" eventType="touchUpInside" id="2vc-x0-5O7"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7HM-Ne-fWX">
                                 <rect key="frame" x="172" y="583" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -367,7 +366,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oFo-10-oUt">
-                                <rect key="frame" x="154" y="501" width="67" height="30"/>
+                                <rect key="frame" x="154" y="414" width="67" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Complete"/>
                                 <connections>
@@ -375,7 +374,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="imC-yL-vWE">
-                                <rect key="frame" x="274" y="414" width="30" height="52"/>
+                                <rect key="frame" x="274" y="392" width="30" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                 <state key="normal" title="+"/>
@@ -383,6 +382,21 @@
                                     <action selector="addButtonPressed:" destination="Z2h-sF-HwZ" eventType="touchUpInside" id="cLH-gH-C6u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkc-xr-muU">
+                                <rect key="frame" x="53" y="392" width="30" height="52"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="33"/>
+                                <state key="normal" title="-"/>
+                                <connections>
+                                    <action selector="subtractButtonPressed:" destination="Z2h-sF-HwZ" eventType="touchUpInside" id="2vc-x0-5O7"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JRX-P1-dXf">
+                                <rect key="frame" x="139" y="506" width="97" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="38L-2f-OdX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -390,6 +404,7 @@
                     <navigationItem key="navigationItem" id="6yL-sD-6vX"/>
                     <connections>
                         <outlet property="progressBar" destination="J4O-X6-nP5" id="9Ch-jC-6ja"/>
+                        <outlet property="reviseDateTextField" destination="JRX-P1-dXf" id="bJA-ci-opZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Lb2-Gx-YwF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

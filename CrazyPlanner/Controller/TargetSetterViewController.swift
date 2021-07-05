@@ -49,7 +49,8 @@ class TargetSetterViewController: UIViewController {
         
         datePicker.addTarget(self, action: #selector(datePickerDidChange(_:)), for: .allEvents)
         
-        createDatePicker()
+        let datePickerCreator = DatePickerCreator(view: view, textField: targetDateTextField, datePicker: datePicker)
+        datePickerCreator.createDatePicker()
     }
     
     @IBAction func done(_ sender: UIButton) {
@@ -85,8 +86,8 @@ class TargetSetterViewController: UIViewController {
                 newDailyTarget.name = targetNameTextField.text!
                 newDailyTarget.total = Int32(targetDailyAmountTextField.text!) ?? 0
                 newDailyTarget.progress = 0
-                
-                
+                newDailyTarget.section = -1
+                newDailyTarget.row = -1
                 
                 // 增加若還沒到最終日期就加上一日
                 var dateComponents = DateComponents()
@@ -102,6 +103,8 @@ class TargetSetterViewController: UIViewController {
             newDailyTarget.name = targetNameTextField.text!
             newDailyTarget.total = Int32(targetDailyAmountTextField.text!) ?? 0
             newDailyTarget.progress = 0
+            newDailyTarget.section = -1
+            newDailyTarget.row = -1
             
             delegate?.didFinishAddingDailyTarget(dailyTarget: newDailyTarget)
             delegate?.didFinishAddingTarget(target: newTarget)
@@ -177,9 +180,6 @@ class TargetSetterViewController: UIViewController {
                 targetDailyAmountTextField.text = String(format: "%.0f", daily)
                 
             }
-            
-            
-            
         }
     }
     
@@ -192,40 +192,40 @@ class TargetSetterViewController: UIViewController {
 
 extension TargetSetterViewController: UITextFieldDelegate {
     
-    func createDatePicker () {
-        
-        targetDateTextField.textAlignment = .center
-        
-        //toolbar
-        let toolbar = UIToolbar()
-        toolbar.sizeToFit()
-        
-        //bar button
-        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        toolbar.setItems([doneBtn], animated: true)
-        
-        
-        // assign toolbar
-        targetDateTextField.inputAccessoryView = toolbar
-        
-        // assign date picker to the text field
-        targetDateTextField.inputView = datePicker
-        
-        // change the prefeeredDatePickerStyle to wheels
-        datePicker.preferredDatePickerStyle = .wheels
-        
-        //date picker mode
-        datePicker.datePickerMode = .date
-        
-    }
-    
+//    func createDatePicker () {
+//
+//        targetDateTextField.textAlignment = .center
+//
+//        //toolbar
+//        let toolbar = UIToolbar()
+//        toolbar.sizeToFit()
+//
+//        //bar button
+//        let doneBtn = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+//        toolbar.setItems([doneBtn], animated: true)
+//
+//
+//        // assign toolbar
+//        targetDateTextField.inputAccessoryView = toolbar
+//
+//        // assign date picker to the text field
+//        targetDateTextField.inputView = datePicker
+//
+//        // change the prefeeredDatePickerStyle to wheels
+//        datePicker.preferredDatePickerStyle = .wheels
+//
+//        //date picker mode
+//        datePicker.datePickerMode = .date
+//
+//    }
+//
     @objc func donePressed() {
         //fomatter
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
         formatter.timeStyle = .none
         formatter.dateFormat = "yyyy/MM/dd"
-        
+
         targetDateTextField.text = formatter.string(from: datePicker.date)
         view.endEditing(true)
     }
