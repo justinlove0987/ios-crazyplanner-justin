@@ -3,11 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D0521C5826830E4C005998C9 /* TargetEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0521C5726830E4C005998C9 /* TargetEditorViewController.swift */; };
+		743C8C5DD86189B0437F5077 /* Pods_CrazyPlanner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DD5F62B41224083878AED79 /* Pods_CrazyPlanner.framework */; };
+		D0521C5826830E4C005998C9 /* DailyTargetEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0521C5726830E4C005998C9 /* DailyTargetEditorViewController.swift */; };
+		D05586B22694246B000333AE /* ListModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05586B12694246B000333AE /* ListModeViewController.swift */; };
+		D05586D6269592C0000333AE /* TargetEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D05586D5269592C0000333AE /* TargetEditorViewController.swift */; };
 		D05D863226817BE1002428ED /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D05D863026817BE1002428ED /* DataModel.xcdatamodeld */; };
 		D0AB5FA426803A94007B761F /* ProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB5FA326803A94007B761F /* ProgressBar.swift */; };
 		D0AB5FAB26806F2F007B761F /* TargetSetterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0AB5FAA26806F2F007B761F /* TargetSetterViewController.swift */; };
@@ -26,7 +29,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D0521C5726830E4C005998C9 /* TargetEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetEditorViewController.swift; sourceTree = "<group>"; };
+		5DD5F62B41224083878AED79 /* Pods_CrazyPlanner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CrazyPlanner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		73E4C7680FE464DEBA869213 /* Pods-CrazyPlanner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyPlanner.debug.xcconfig"; path = "Target Support Files/Pods-CrazyPlanner/Pods-CrazyPlanner.debug.xcconfig"; sourceTree = "<group>"; };
+		BE6C60B038045AD41468B95D /* Pods-CrazyPlanner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CrazyPlanner.release.xcconfig"; path = "Target Support Files/Pods-CrazyPlanner/Pods-CrazyPlanner.release.xcconfig"; sourceTree = "<group>"; };
+		D0521C5726830E4C005998C9 /* DailyTargetEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTargetEditorViewController.swift; sourceTree = "<group>"; };
+		D05586B12694246B000333AE /* ListModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModeViewController.swift; sourceTree = "<group>"; };
+		D05586D5269592C0000333AE /* TargetEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetEditorViewController.swift; sourceTree = "<group>"; };
 		D05D863126817BE1002428ED /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		D0AB5FA326803A94007B761F /* ProgressBar.swift */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.swift; path = ProgressBar.swift; sourceTree = "<group>"; };
 		D0AB5FAA26806F2F007B761F /* TargetSetterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TargetSetterViewController.swift; sourceTree = "<group>"; };
@@ -51,12 +59,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				743C8C5DD86189B0437F5077 /* Pods_CrazyPlanner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		667BFC517892856B028A8B30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				73E4C7680FE464DEBA869213 /* Pods-CrazyPlanner.debug.xcconfig */,
+				BE6C60B038045AD41468B95D /* Pods-CrazyPlanner.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B8287EA331304ADB34CDF28F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5DD5F62B41224083878AED79 /* Pods_CrazyPlanner.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D05D863326817BEF002428ED /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +107,8 @@
 			children = (
 				D0C4773F267C91BF002742FB /* CrazyPlanner */,
 				D0C4773E267C91BF002742FB /* Products */,
+				667BFC517892856B028A8B30 /* Pods */,
+				B8287EA331304ADB34CDF28F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -111,8 +139,10 @@
 			isa = PBXGroup;
 			children = (
 				D0C47744267C91BF002742FB /* HomeViewController.swift */,
+				D05586B12694246B000333AE /* ListModeViewController.swift */,
 				D0AB5FAA26806F2F007B761F /* TargetSetterViewController.swift */,
-				D0521C5726830E4C005998C9 /* TargetEditorViewController.swift */,
+				D05586D5269592C0000333AE /* TargetEditorViewController.swift */,
+				D0521C5726830E4C005998C9 /* DailyTargetEditorViewController.swift */,
 				D0C47757267C9536002742FB /* StatisticsViewController.swift */,
 				D0AB5FA326803A94007B761F /* ProgressBar.swift */,
 				D0C4775B267C9555002742FB /* SettingViewController.swift */,
@@ -128,9 +158,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D0C47751267C91C6002742FB /* Build configuration list for PBXNativeTarget "CrazyPlanner" */;
 			buildPhases = (
+				25D26DB3D89ECD9A7473827C /* [CP] Check Pods Manifest.lock */,
 				D0C47739267C91BF002742FB /* Sources */,
 				D0C4773A267C91BF002742FB /* Frameworks */,
 				D0C4773B267C91BF002742FB /* Resources */,
+				1B01455D2A43AB14E2DA5D92 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,13 +218,55 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1B01455D2A43AB14E2DA5D92 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CrazyPlanner/Pods-CrazyPlanner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CrazyPlanner/Pods-CrazyPlanner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CrazyPlanner/Pods-CrazyPlanner-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		25D26DB3D89ECD9A7473827C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CrazyPlanner-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D0C47739267C91BF002742FB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D0B2ADEB268F9C570034C324 /* DatePickerCreator.swift in Sources */,
-				D0521C5826830E4C005998C9 /* TargetEditorViewController.swift in Sources */,
+				D0521C5826830E4C005998C9 /* DailyTargetEditorViewController.swift in Sources */,
 				D0D784DD268F194200868714 /* DailyTargetOrderedByDate.swift in Sources */,
 				D0C47758267C9536002742FB /* StatisticsViewController.swift in Sources */,
 				D05D863226817BE1002428ED /* DataModel.xcdatamodeld in Sources */,
@@ -202,6 +276,8 @@
 				D0AB5FAB26806F2F007B761F /* TargetSetterViewController.swift in Sources */,
 				D0C47743267C91BF002742FB /* SceneDelegate.swift in Sources */,
 				D0AB5FA426803A94007B761F /* ProgressBar.swift in Sources */,
+				D05586B22694246B000333AE /* ListModeViewController.swift in Sources */,
+				D05586D6269592C0000333AE /* TargetEditorViewController.swift in Sources */,
 				D0C4775C267C9555002742FB /* SettingViewController.swift in Sources */,
 				D0D784D9268EA22B00868714 /* CustomTableViewHeader.swift in Sources */,
 			);
@@ -347,6 +423,7 @@
 		};
 		D0C47752267C91C6002742FB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 73E4C7680FE464DEBA869213 /* Pods-CrazyPlanner.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -366,6 +443,7 @@
 		};
 		D0C47753267C91C6002742FB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE6C60B038045AD41468B95D /* Pods-CrazyPlanner.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

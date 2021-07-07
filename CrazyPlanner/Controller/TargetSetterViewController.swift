@@ -28,10 +28,10 @@ class TargetSetterViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    let datePicker = UIDatePicker()
-    
     var targetCostDaysQuotient: Int = 0
     var targetCostDaysRemainder: Int = 0
+    
+    let datePicker = UIDatePicker()
     var currentDate = Date()
     var textFieldDate = Date() //日期可能會從textfied或是datePicker轉變
     
@@ -39,6 +39,7 @@ class TargetSetterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         targetDailyAmountTextField.delegate = self
         targetProgressTextField.delegate = self
         
@@ -72,9 +73,9 @@ class TargetSetterViewController: UIViewController {
             let uuid = UUID().uuidString
             newTarget.id = uuid
             newTarget.name = targetNameTextField.text!
-            newTarget.unit = targetUnitTextField.text!
-            newTarget.total = targetTotalAmountTextField.text!
-            newTarget.progress = targetProgressTextField.text!
+            newTarget.unit = Int64(targetUnitTextField.text!) ?? 0
+            newTarget.total = Int64(targetTotalAmountTextField.text!) ?? 0
+            newTarget.progress = Int64(targetProgressTextField.text!) ?? 0
             newTarget.daily = targetDailyAmountTextField.text!
             
 
@@ -84,7 +85,7 @@ class TargetSetterViewController: UIViewController {
                 newDailyTarget.date = date
                 newDailyTarget.id = uuid
                 newDailyTarget.name = targetNameTextField.text!
-                newDailyTarget.total = Int32(targetDailyAmountTextField.text!) ?? 0
+                newDailyTarget.total = Int64(targetDailyAmountTextField.text!) ?? 0
                 newDailyTarget.progress = 0
                 newDailyTarget.section = -1
                 newDailyTarget.row = -1
@@ -101,14 +102,15 @@ class TargetSetterViewController: UIViewController {
             newDailyTarget.date = date
             newDailyTarget.id = uuid
             newDailyTarget.name = targetNameTextField.text!
-            newDailyTarget.total = Int32(targetDailyAmountTextField.text!) ?? 0
+            newDailyTarget.total = Int64(targetDailyAmountTextField.text!) ?? 0
             newDailyTarget.progress = 0
             newDailyTarget.section = -1
             newDailyTarget.row = -1
             
             delegate?.didFinishAddingDailyTarget(dailyTarget: newDailyTarget)
             delegate?.didFinishAddingTarget(target: newTarget)
-            dismiss(animated: true, completion: nil)
+            
+            navigationController?.popViewController(animated: true)
         }
         
 

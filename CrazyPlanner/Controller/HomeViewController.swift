@@ -43,10 +43,10 @@ class HomeViewController: UIViewController, TargetSetterViewControllerDelegate, 
         tableView.delegate = self
         
         tableView.dragInteractionEnabled = true
-        tableView.dragDelegate = self
-        tableView.dropDelegate = self
         
-        loadDailyTargets() // 從CoreData提取資料
+        // 從CoreData讀取資料
+        loadDailyTargets()
+        loadTargets()
 
         
     }
@@ -78,16 +78,25 @@ class HomeViewController: UIViewController, TargetSetterViewControllerDelegate, 
                 targetSetterVC.delegate = self
             }
         } else if segue.identifier == "goToEditTarget" {
-            if let targetEditorVC = segue.destination as? TargetEditorViewController, let indexPath = sender as? IndexPath {
+            if let targetEditorVC = segue.destination as? DailyTargetEditorViewController, let indexPath = sender as? IndexPath {
                 let selectedRow = calculateRowIndexInTableView(indexPath: indexPath)
                 targetEditorVC.selectedDailyTarget = dailyTargets[selectedRow]
                 targetEditorVC.delegate = self
+            }
+        } else if segue.identifier == "goToListModeVC" {
+            if let listModeVC = segue.destination as? ListModeViewController {
+                listModeVC.targets = targets
             }
         }
     }
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "goToAddTarget", sender: self)
+    }
+    
+    
+    @IBAction func listModeButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToListModeVC", sender: self)
     }
     
     @IBAction func Nothing(_ sender: UIButton) {
@@ -195,28 +204,6 @@ class HomeViewController: UIViewController, TargetSetterViewControllerDelegate, 
         return rowNumber
     }
     
-    func getMaxRowIndexInSection(indexPath: IndexPath) -> Int {
-        var rowNumber = 0
-        for index in 0 ... indexPath.section {
-            rowNumber += self.tableView.numberOfRows(inSection: index)
-        }
-        
-        rowNumber -= 1
-        
-        return rowNumber
-    }
-    
-    func getMinRowIndexInSection(indexPath: IndexPath) -> Int {
-        var rowNumber = 0
-        for index in 0 ..< indexPath.section {
-            rowNumber += self.tableView.numberOfRows(inSection: index)
-        }
-        
-        rowNumber += 1
-        
-        return rowNumber
-    }
-    
 }
 
 // MARK: - table view data source methods
@@ -251,119 +238,11 @@ extension HomeViewController: UITableViewDataSource {
 
 // MARK: - table view delegate methods
 
-extension HomeViewController: UITableViewDelegate, UITableViewDragDelegate, UITableViewDropDelegate {
+extension HomeViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         tableView.deselectRow(at: indexPath, animated: true)
         performSegue(withIdentifier: "goToEditTarget", sender: indexPath)
-        
-    }
-    
-    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let dragItem = UIDragItem(itemProvider: NSItemProvider())
-        let row = calculateRowIndexInTableView(indexPath: indexPath)
-        dragItem.localObject = dailyTargets[row].row
-        return [ dragItem ]
-        
-    }
-    
-    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
-        
-    }
-    
-    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
-        let sourceRow = calculateRowIndexInTableView(indexPath: sourceIndexPath)
-        let sourceRows = tableView.numberOfRows(inSection: sourceIndexPath.section)
-        var destinationRow = calculateRowIndexInTableView(indexPath: destinationIndexPath)
-        let maxSourceRowIndex = getMaxRowIndexInSection(indexPath: sourceIndexPath)
-        let maxDestinationRowIndex = getMaxRowIndexInSection(indexPath: destinationIndexPath)
-        
-        if destinationIndexPath.section > sourceIndexPath.section { //
-            destinationRow -= 1
-        }
-
-        calculateRowsInSection()
-        
-        // 更動資料庫的順序
-        if sourceIndexPath.section == destinationIndexPath.section {
-            
-            if sourceIndexPath.row < destinationIndexPath.row { //這個是將indexPath在同一個section往下移動的狀況
-                let numberOfMovedRows = destinationIndexPath.row - sourceIndexPath.row
-                for rowIndex in (sourceRow + 1)...(sourceRow + numberOfMovedRows) {
-                    dailyTargets[rowIndex].row -= 1
-                }
-            } else if sourceIndexPath.row > destinationIndexPath.row {
-                let numberOfMovedRows = sourceIndexPath.row - destinationIndexPath.row
-                for rowIndex in (sourceRow - numberOfMovedRows)...(sourceRow - 1) {
-                    dailyTargets[rowIndex].row += 1
-                }
-                
-            }
-            
-        } else if sourceIndexPath.section < destinationIndexPath.section {
-            
-            if sourceRow != maxSourceRowIndex { //由上而下跨section移動時，如果是上方的section就不用更改任何上方的row值
-                for rowIndex in (sourceRow + 1) ... (maxSourceRowIndex) {
-                    dailyTargets[rowIndex].row -= 1
-                }
-            }
-            
-            if destinationRow != maxDestinationRowIndex{
-                for rowIndex in (destinationRow + 1)...maxDestinationRowIndex {
-                    dailyTargets[rowIndex].row += 1
-                }
-            }
-            
-            if sourceRows == 1 {
-                for dailyTarget in dailyTargets {
-                    if dailyTarget.section >= destinationIndexPath.section {
-                        dailyTarget.section -= 1
-                    }
-            }
-            }
-            
-            
-            
-        } else {
-            
-        }
-        
-        let dateString = sortedDateArrayForSection[destinationIndexPath.section].key + "T01:15:00+0000"
-
-        dailyTargets[sourceRow].date = stringToDateFormatter.date(from: dateString)
-        dailyTargets[sourceRow].section = Int64(destinationIndexPath.section)
-        dailyTargets[sourceRow].row = Int64(destinationIndexPath.row)
-        
-        
-        for dailyTarget in dailyTargets {
-            print(dailyTarget.name)
-            print(dateFormatter.string(from: dailyTarget.date ?? Date()))
-            print(dailyTarget.section)
-            print(dailyTarget.row)
-        }
-        
-        // 寫入資料庫
-        do {
-            try context.save()
-        } catch {
-            print("Error saving category \(error)")
-        }
-        
-        loadDailyTargets()
-        calculateRowsInSection()
-        
-
-        if sourceRows == 1 {
-            tableView.deleteSections([sourceIndexPath.section], with: .automatic)
-        }
-        
-        tableView.reloadData()
         
     }
     

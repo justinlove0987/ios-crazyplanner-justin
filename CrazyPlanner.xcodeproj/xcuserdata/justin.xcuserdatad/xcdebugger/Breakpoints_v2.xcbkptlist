@@ -15,9 +15,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "339"
-            endingLineNumber = "339"
-            landmarkName = "tableView(_:moveRowAt:to:)"
-            landmarkType = "7">
+            endingLineNumber = "339">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -31,9 +29,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "325"
-            endingLineNumber = "325"
-            landmarkName = "tableView(_:moveRowAt:to:)"
-            landmarkType = "7">
+            endingLineNumber = "325">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
